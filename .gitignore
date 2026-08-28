@@ -1,0 +1,19 @@
+env
+.env
+*.env
+# Ignore everything in the writable directory
+writable/*
+!writable/index.html
+!writable/.htaccess
+
+node_modules/
+*_modules/
+writable/*/*.json
+deprecated
+*.zip 
+/vendor/
+.phpunit.result.cache
+*.log
+debug**
+old.Inc
+.vscode

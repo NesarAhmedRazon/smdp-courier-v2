@@ -123,15 +123,13 @@ function update_pathaw_order_status($payload)
  * (above) and includes/consignment.php's initial "created" event go
  * through.
  *
- * KNOWN ISSUE (kept as-is, not part of this rework): the 'delivery-failed'
- * case below calls update_status('wc-delivery-failed') with a hyphen,
- * but the actually-registered status key uses an underscore
- * ('wc-delivery_failed' — see includes/fallback-courier-statuses.php and
- * the standalone SMDP: Order Status plugin). Because of this mismatch,
- * a delivery-failed webhook event does not move the order into any
- * registered status. Flagged here and in the project summary as a good
- * next fix; left unchanged per the "webhook as-is" instruction for this
- * rework.
+ * KNOWN ISSUE — FIXED: the 'delivery-failed' case below used to call
+ * update_status('wc-delivery-failed') with a hyphen, but the actually-
+ * registered status key uses an underscore ('wc-delivery_failed' — see
+ * includes/fallback-courier-statuses.php and the standalone SMDP: Order
+ * Status plugin). That mismatch meant a delivery-failed webhook event
+ * never moved the order into any registered status; it's now corrected
+ * to use the underscore key.
  *
  * @param int|string $order_id
  * @param string $consignment_id
@@ -212,7 +210,7 @@ function update_order($order_id, $consignment_id, $status, $fee = 0, $reason = n
             break;
         case 'delivery-failed':
             $order->add_order_note(__('Delivery Failed: ' . $reason), true);
-            $order->update_status('wc-delivery-failed'); // see KNOWN ISSUE above
+            $order->update_status('wc-delivery_failed');
             break;
         case 'returned':
             $order->add_order_note(__('Returned: ' . $reason), true);

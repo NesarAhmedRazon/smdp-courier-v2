@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: SMDP: Pathao Courier V2
+ * Plugin Name: SMDP: 3 Pathao Courier V2
  * Plugin URI:  https://github.com/NesarAhmedRazon/SMDP-Courier
  * Description: Pathao courier integration for SMDPicker — configuration panel, consignment (shipment) creation, and the delivery-status webhook. Pathao only, by design.
  * Version:     2.0.0
